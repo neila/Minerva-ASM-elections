@@ -7,9 +7,9 @@ Before using this to actually run an election, read the segment on preparing the
 #### Exists:
 - `vote-core`
 > This is the core of the code – an implementation of the election method.
-> originally from: https://github.com/bradbeattie/python-vote-core
-> there's a Py3 version: https://pypi.org/project/python3-vote-core/
-> the authors say it isn't "clean" though, but works.
+> - originally from: https://github.com/bradbeattie/python-vote-core
+> - there's a Py3 version: https://pypi.org/project/python3-vote-core/
+> - the authors say it isn't "clean" though, but works.
 - `python-graph-master`
 > which is...
 - `asm_vote_counter.py`
