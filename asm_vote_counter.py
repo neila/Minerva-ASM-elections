@@ -1,10 +1,12 @@
 # coding: utf-8
-from pyvotecore.stv import STV
-from pyvotecore.schulze_stv import SchulzeSTV
-from pyvotecore.condorcet import CondorcetHelper
+from vote_core.pyvotecore.stv import STV
+from vote_core.pyvotecore.schulze_stv import SchulzeSTV
+from vote_core.pyvotecore.condorcet import CondorcetHelper
 import csv
 from pprint import pprint
 
+# MOST IMPORTANT THING: how your data looks!
+# TODO: write requirements.
 
 def run_schulz(votes, header, full_data=False):
     """
@@ -61,14 +63,15 @@ def run_schulz(votes, header, full_data=False):
 M2020_votes = []
 M2019_votes = []
 M2021_votes = []
+votes = []
 
 headers =[]
 
-with open('/Users/Roiman/Downloads/test1.csv',
+with open('/Users/Roiman/Downloads/Spring 2019 Ballot (Responses) - Data Procseeing M22 (22_40 Jan 27 PST).csv',
           'rb') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     for row in csvreader:
-        M2020_votes.append(row)
+        votes.append(row)
     # for row in csvreader:
     #     if row[0] == 'M2019':
     #         M2019_votes.append(row)
@@ -86,9 +89,9 @@ with open('/Users/Roiman/Downloads/test1.csv',
 # print 'm19'
 # run_schulz([v[1:7] for v in M2019_votes], headers[0][1:7])
 # m20
-print 'm20'
-run_schulz([v[0:6] for v in M2020_votes],
-    headers[0][0:6])
+print 'm22'
+run_schulz([v[2:10] for v in votes[1:]],
+    votes[0][2:10], full_data=False)
 # m21
 # print 'm21'
 # run_schulz([v[14:] for v in M2021_votes], headers[0][14:])

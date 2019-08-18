@@ -10,10 +10,14 @@ Before using this to actually run an election, read the segment on preparing the
 > - originally from: https://github.com/bradbeattie/python-vote-core
 > - there's a Py3 version: https://pypi.org/project/python3-vote-core/
 > - the authors say it isn't "clean" though, but works.
-- `python-graph-master`
-> which is...
+- `pygraph`
+> This is required for `vote-core`. Why? IDK.
+> - originally from https://github.com/pmatiello/python-graph
+> - updated version exist in: https://github.com/Shoobx/python-graph
+> honestly, I haven't tested the new version. May break everything.
 - `asm_vote_counter.py`
-> which is...
+> This is the bulk of the code we actually wrote.
+> It calls the necessary functions and...
 
 #### Missing:
 - UI
