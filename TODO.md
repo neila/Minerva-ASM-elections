@@ -13,9 +13,11 @@ Questions:
 
 # how the code should work:
 
-- the path for the data as a csv should be selected
+- the path for the data as a csv should be selected DONE
 - the titles for each class/cohort should be specified
 - and verified!
+- verify CSV - DONE
+- verify the file is structured correctly.
 - the code should run automatically from that point,
 rendering the information needed and spewing out info.
 
@@ -25,3 +27,5 @@ rendering the information needed and spewing out info.
 - add a requirements .txt
 - add instructions how to run
 - make UI if possible
+- add an example form / csv file
+- Ask for user input of N of winners
