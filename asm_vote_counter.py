@@ -1,69 +1,14 @@
 # coding: utf-8
-from vote_core.pyvotecore.stv import STV
-from vote_core.pyvotecore.schulze_stv import SchulzeSTV
-from vote_core.pyvotecore.condorcet import CondorcetHelper
+from run_schulze import run_schulz
 import csv
 import sys
 import os
-from pprint import pprint
 from Tkinter import Tk # used for UI
 from tkFileDialog import askopenfilename # used to pick a file
 
 
 
 # MOST IMPORTANT THING: how your data looks!
-# TODO: write requirements.
-
-def run_schulz(votes, header, full_data=False):
-    """
-    votes: a list of lists containing each voter, append
-            the ranked preferences of each voter.
-            The preferences are numbers (1 through n)
-            and they are ordered by the same order as the headers
-    header: a list of names, in the order that they were collected.
-    full_data: presents all the information, not just winner names.
-    """
-
-    ballots = []
-
-    for vote in votes:
-
-        ballots.append(
-            filter(
-                lambda candidate: candidate != 'DROP',
-                map(lambda (rank, candidate): 'DROP' if rank == '' else candidate,
-                    sorted(zip(vote, header)))))
-
-
-    ballots = list(filter(lambda candidate: candidate != [], ballots))
-
-
-    ballot_count = {}
-    for ballot in ballots:
-        ballot = tuple(ballot)
-        if ballot in ballot_count:
-            ballot_count[ballot] += 1
-        else:
-            ballot_count[ballot] = 1
-
-
-    input = [{
-        "count": v,
-        "ballot": list(k)
-    } for k, v in ballot_count.items()]
-
-    for line in input:
-        dict_ballot = {}
-        for rank, candidate in enumerate(line['ballot']):
-            dict_ballot[candidate] = -rank
-
-        line['ballot'] = dict_ballot
-
-    if full_data:
-        pprint(SchulzeSTV(input, required_winners=3).as_dict())
-    else:
-        pprint(SchulzeSTV(input, required_winners=3).as_dict()['winners'])
-
 
 Mvotes = [] # a list for temporary storage of vote data by class
 class_IDs = [] # a list for all class IDs
@@ -73,7 +18,12 @@ m21 = ["[Tessa Owens]","[Stella Odiwuor]","[Sho Hihara]","[Nebraska Grayson]","[
 
 
 # TODO: ask user to specify first column with candidate names
-candidates_start_column = 2
+print ("What is the first column that has a candidate name? (first column == 0)")
+try:
+    candidates_start_column = int(raw_input())
+except ValueError:
+    print("ERROR! This is not a number!")
+
 headers =[] # list for headers
 
 r = Tk() # we don't want a full GUI, so keep the root window from appearing
