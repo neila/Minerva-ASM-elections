@@ -73,6 +73,7 @@ m21 = ["[Tessa Owens]","[Stella Odiwuor]","[Sho Hihara]","[Nebraska Grayson]","[
 
 
 # TODO: ask user to specify first column with candidate names
+candidates_start_column = 2
 headers =[] # list for headers
 
 r = Tk() # we don't want a full GUI, so keep the root window from appearing
@@ -89,45 +90,49 @@ if filename.endswith('.csv'):
     with open(filename,
               'rb') as csvfile:
         csvreader = csv.reader(csvfile, delimiter=',')
-        # TODO: each class should be auto-found by a first column indicator
-        """ e.g. 
-        class_IDs = list
-        for row[0] in votes:
-            if row[0] not in class_IDs:
-                class_IDs.append(row[0])
-        """
-
         for row in csvreader:
             votes.append(row)
 
     headers = votes[0] # get headers
-    for row in votes[1:]:
+    votes = votes[1:] # discard headers from votes
+    
+    # find all classes these votes are for
+    for row in votes:
         if row[0] not in class_IDs:
             class_IDs.append(row[0])
     
     for ID in class_IDs:
+        """
+        # set to 1 after we get this class's candidates
+        # this allows us to stop searching in the rows
+        # once we get one non-empty row
+        # WARNING: implicit assumption is that each voter
+        #           ranks *every* candidate in their class.
+        
+        # There is an "obvious" assumption that the indexes will
+        # end up sequential within the same class.
+        # The code must be tweaked otherwise
+        """
+        candidate_ticker = 0
+        candidate_indexes = []
+
         # temporary store votes by class
         for row in votes:
             if row[0] == ID:
                 Mvotes.append(row)
+                # find indexes of headers of this Mclass
+                if candidate_ticker == 0:
+                    for column in row[candidates_start_column:]:
+                        if len(column)>0:
+                            candidate_indexes.append(row.index(column))
+                    if len(candidate_indexes)>0:
+                        candidate_ticker = 1
 
-        # TODO: find indexes of headers of this Mclass
-        # TODO: only select vote and header segments of this Mclass
-
+        # Print which class's results these are
         print ID
-        run_schulz([v[2:] for v in Mvotes],
-            headers[2:], full_data=False)
-
-    # m19
-    # print 'm19'
-    # run_schulz([v[1:7] for v in M2019_votes], headers[0][1:7])
-    # m20
-    # print 'm22'
-    # run_schulz([v[2:10] for v in votes[1:]],
-    #     votes[0][2:10], full_data=False)
-    # m21
-    # print 'm21'
-    # run_schulz([v[14:] for v in M2021_votes], headers[0][14:])
+        # using first and last indexes
+        run_schulz([v[candidate_indexes[0]:candidate_indexes[-1]] for v in Mvotes],
+            headers[candidate_indexes[0]:candidate_indexes[-1]], full_data=False)
 
 else:
     print "File not in CSV format!"
