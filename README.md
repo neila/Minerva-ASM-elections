@@ -32,6 +32,7 @@ Before using this to actually run an election, read the segment on preparing the
 
 - `UI_elements.py`
 > Containes code for the buttons and pop-ups
+> uses Tk and Tkinter, which will require updating in Python 3
 
 #### Missing:
 - Processing from Excel to csv
