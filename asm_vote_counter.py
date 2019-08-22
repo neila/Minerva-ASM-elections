@@ -1,12 +1,9 @@
 # coding: utf-8
 from run_schulze import run_schulz
+from UI_elements import get_file_path, get_number_of_candidates
 import csv
 import sys
 import os
-from Tkinter import Tk # used for UI
-from tkFileDialog import askopenfilename # used to pick a file
-
-
 
 # MOST IMPORTANT THING: how your data looks!
 
@@ -24,15 +21,13 @@ try:
 except ValueError:
     print("ERROR! This is not a number!")
 
+
+# TODO: ask for number of winners (verify 3)
+
 headers =[] # list for headers
 
-r = Tk() # we don't want a full GUI, so keep the root window from appearing
-r.withdraw()
-filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
-
-# these two lines cloase the filepicker after selection
-r.update()
-Tk().destroy()
+filename = get_file_path()
+print get_number_of_candidates()
 
 # verify the file is a .csv
 if filename.endswith('.csv'):
@@ -82,7 +77,8 @@ if filename.endswith('.csv'):
         print ID
         # using first and last indexes
         run_schulz([v[candidate_indexes[0]:candidate_indexes[-1]] for v in Mvotes],
-            headers[candidate_indexes[0]:candidate_indexes[-1]], full_data=False)
+            headers[candidate_indexes[0]:candidate_indexes[-1]], full_data=False,
+            required_winners=3)
 
 else:
     print "File not in CSV format!"
