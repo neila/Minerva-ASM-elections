@@ -1,6 +1,6 @@
 # coding: utf-8
-from run_schulze import run_schulz
-from UI_elements import get_file_path, get_number_of_winners, get_first_candidate_column
+from run_files.run_schulze import run_schulz
+from run_files.UI_elements import get_file_path, get_number_of_winners, get_first_candidate_column
 import csv
 import sys
 import os
@@ -71,7 +71,7 @@ if filename.endswith('.csv'):
                         candidate_ticker = 1
 
         # Print which class's results these are
-        print ID
+        print "Winners for class: "+ID
         # using first and last indexes
         run_schulz([v[candidate_indexes[0]:candidate_indexes[-1]] for v in Mvotes],
             headers[candidate_indexes[0]:candidate_indexes[-1]], full_data=False,
