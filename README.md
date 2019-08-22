@@ -19,7 +19,7 @@ Before using this to actually run an election, read the segment on preparing the
 ### Voters Don't Have to be Sequential
 > rows represent a ballot/vote. Voters can be in any order, as long as column 0 is class IDs.
 
-### Voters Not Spoiling Their Ballots Must Rank All Candidates
+### Voters Not Spoiling Their Ballots Must Rank *All* Candidates
 > it's how our voting works. If it ever changes, changes have to be made to the code.
 > these changes include, but may not be limited to:
 > - the way `run_schulze.py` counts votes
