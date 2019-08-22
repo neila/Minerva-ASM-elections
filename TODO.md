@@ -14,11 +14,12 @@ Questions:
 # how the code should work:
 
 - the path for the data as a csv should be selected DONE
-- the titles for each class/cohort should be specified
-- and verified!
+- the titles for each class/cohort should be specified DONE
+- and verified! DONE
 - verify CSV - DONE
 - verify the file is structured correctly.
 - the code should run automatically from that point,
+
 rendering the information needed and spewing out info.
 
 - it should be possible to "turn-on" the full-data option
@@ -26,6 +27,10 @@ rendering the information needed and spewing out info.
 # code-related TODOs
 - add a requirements .txt
 - add instructions how to run
-- make UI if possible
 - add an example form / csv file
-- Ask for user input of N of winners
+
+
+# UI:
+- Ask for user input of N of winners DONE
+- User input for first column with names DONE
+- Show results in pop-up window
