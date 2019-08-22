@@ -21,8 +21,17 @@ Before using this to actually run an election, read the segment on preparing the
 > honestly, I haven't tested the new version. May break everything.
 
 - `asm_vote_counter.py`
-> This is the bulk of the code we actually wrote.
-> It calls the necessary functions and...
+> - asks for the first column in the CSV that has candidate names
+> - asks for number of desired winners
+> - calls `run_shulze.py` on each class ballot
+> > ie. it recognizes in a larger CSV which lines belond to each class
+> >	as well as the corrosponding cadidates.
+
+- `run_schulze.py`
+> counts the vallot and runs the schulz method on the data
+
+- `UI_elements.py`
+> Containes code for the buttons and pop-ups
 
 #### Missing:
 - Processing from Excel to csv
