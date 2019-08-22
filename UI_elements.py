@@ -15,27 +15,57 @@ def get_file_path():
 
 	return filename
 
-def getvalue():
-	raw_input()
 
-def get_number_of_candidates():
-	root = Tk() # creating a TK
-	# we don't want a full GUI, so keep the root window from appearing
-	# root.withdraw()
+class TextButton(Tk):
 
-	root.title('how to get text from textbox')
+    def __init__(self, title="get", btnlabel="Confirm", txt=""):
+        Tk.__init__(self)
+        self.frame = Frame(self)
+        self.entry = Entry(self)
+        self.title = self.title(title)
+        self.label = Label(self,text=txt)
+        self.button = Button(self, text=btnlabel, command=self.on_button)
+        self.frame.pack()
+        self.label.pack()
+        self.button.pack()
+        self.entry.pack()
 
-	mystring = StringVar()
+    def on_button(self):
+    	self.mystring = self.entry.get()
+    	self.destroy()
+        return 
 
-	Label(root, text="Text to get").grid(row=0, sticky=W)  #label
-	Entry(root, textvariable = mystring).grid(row=0, column=1, sticky=E) #entry textbox
+class YesNoButton(Tk):
 
-	WSignUp = Button(root, text="print text", command=getvalue).grid(row=3, column=0, sticky=W) #button
+    def __init__(self, title="get", btnlabel="Confirm", txt=""):
+        Tk.__init__(self)
+        self.frame = Frame(self)
+        self.entry = Entry(self)
+        self.title = self.title(title)
+        self.label = Label(self,text=txt)
+        self.button = Button(self, text=btnlabel, command=self.on_button)
+        self.frame.pack()
+        self.label.pack()
+        self.button.pack()
+        self.entry.pack()
 
-	# these two lines close the filepicker after selection
-	root.update()
+    def on_button(self):
+    	self.mystring = self.entry.get()
+    	self.destroy()
+        return 
 
-	return mystring
+def get_first_candidate_column():
+	w = TextButton(title="Column",
+		btnlabel="Confirm", txt="First Column With\nCandidate Names?\n(index 0)")
+	w.mainloop()
+	return w.mystring
+
+def get_number_of_winners():
+	w = TextButton(title="N Winners",
+		btnlabel="Confirm", txt="Number of Winners?")
+	w.mainloop()
+	return w.mystring
+
 
 
 
