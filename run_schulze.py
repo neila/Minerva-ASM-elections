@@ -5,7 +5,7 @@ from vote_core.pyvotecore.stv import STV
 from vote_core.pyvotecore.schulze_stv import SchulzeSTV
 from vote_core.pyvotecore.condorcet import CondorcetHelper
 from pprint import pprint
-def run_schulz(votes, header, full_data=False):
+def run_schulz(votes, header, full_data=False, required_winners=3):
     """
     votes: a list of lists containing each voter, append
             the ranked preferences of each voter.
@@ -51,8 +51,8 @@ def run_schulz(votes, header, full_data=False):
         line['ballot'] = dict_ballot
 
     if full_data:
-        pprint(SchulzeSTV(input, required_winners=3).as_dict())
+        pprint(SchulzeSTV(input, required_winners=required_winners).as_dict())
     else:
-        pprint(SchulzeSTV(input, required_winners=3).as_dict()['winners'])
+        pprint(SchulzeSTV(input, required_winners=required_winners).as_dict()['winners'])
 
 
