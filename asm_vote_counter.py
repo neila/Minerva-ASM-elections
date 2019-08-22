@@ -1,6 +1,6 @@
 # coding: utf-8
 from run_schulze import run_schulz
-from UI_elements import get_file_path, get_number_of_candidates
+from UI_elements import get_file_path, get_number_of_winners, get_first_candidate_column
 import csv
 import sys
 import os
@@ -10,14 +10,11 @@ import os
 Mvotes = [] # a list for temporary storage of vote data by class
 class_IDs = [] # a list for all class IDs
 votes = [] # a list for all voter data
-m22 = ["[Karina Gencheva]","[Chris Wilkinson]","[Amulya Pilla]","[Muhammad Abdurrehman Asif]", "[Fju Mewes]", "[Yael (Maya) Cohen]", "[Sarah Poisner]", "[Aspen Pflughoeft]"]
-m21 = ["[Tessa Owens]","[Stella Odiwuor]","[Sho Hihara]","[Nebraska Grayson]","[Johannes M. Halkenhaeusser]","[Audrey Warters]"]
-
 
 # TODO: ask user to specify first column with candidate names
-print ("What is the first column that has a candidate name? (first column == 0)")
 try:
-    candidates_start_column = int(raw_input())
+    candidates_start_column = int(get_first_candidate_column())
+    required_winners = int(get_number_of_winners())
 except ValueError:
     print("ERROR! This is not a number!")
 
@@ -27,7 +24,7 @@ except ValueError:
 headers =[] # list for headers
 
 filename = get_file_path()
-print get_number_of_candidates()
+
 
 # verify the file is a .csv
 if filename.endswith('.csv'):
@@ -78,7 +75,7 @@ if filename.endswith('.csv'):
         # using first and last indexes
         run_schulz([v[candidate_indexes[0]:candidate_indexes[-1]] for v in Mvotes],
             headers[candidate_indexes[0]:candidate_indexes[-1]], full_data=False,
-            required_winners=3)
+            required_winners=required_winners)
 
 else:
     print "File not in CSV format!"
