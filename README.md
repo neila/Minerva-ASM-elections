@@ -3,6 +3,24 @@
 ## IMPORTANT
 Before using this to actually run an election, read the segment on preparing the data for processing. Results will be incorrect otherwise.
 
+## How the CSV file needs to be structured?
+### First Column: Class ID
+> in theory, if ASM representatives are per-cohort this ID should be unique for class+cohort. eg. M23A, M23B, M24, M25, M26A, M26B, etc.
+
+### Candidate Columns
+> - the candidate of each class (or cohort) should be sequential.
+> > ie all candidates for M22 should span columns 1-10, not columns 1, 4, 10-15, 21-23.
+
+> - all candidate columns should be sequential.
+> > ie. no columns contatining other information should exist between two candidate names, EVEN if those are candidates of different classes/cohorts.
+
+> - The code can be run multiple times on multiple files, but as long as the above is true, it will identify the candidates and voters of each class and spew-out the winners.
+
+### Voters Don't Have to be Sequential
+> rows represent a ballot/vote. Voters can be in any order, as long as column 0 is class IDs.
+
+
+
 ## What's In Here?
 #### Exists:
 
@@ -39,7 +57,7 @@ Before using this to actually run an election, read the segment on preparing the
 > which is...
 
 ##### Cautionary Note (Roiman, M19, 2019)
-Honestly, I don't know all of the ins and outs of this code. It works. It worked when we needed it to work. But it's one of those "sold as-is" things. Schultze is definitely an awesome method. But maybe get some CS majors torebuild it.
+Honestly, I don't know all of the ins and outs of this code. It works. It worked when we needed it to work. But it's one of those "sold as-is" things. Schultze is definitely an awesome method. But maybe get some CS majors to rebuild it.
 
 ## Dependencies:
 The code used by the ASM has several dependencies. These include `python-vote-core` and `python-graph-master`. These cant be found with pip, as far as I could tell, and we definitely should re-work them ASAP.
